@@ -8,7 +8,9 @@ import NavBar from './../compopnents/Navbar'
 import AddPost from './../compopnents/AddPost'
 import Skeleton from '@mui/material/Skeleton';
 import {useState} from 'react'
-import Link from "next/link";
+import {Provider } from "react-redux";
+import { store } from "@/stores/store";
+import Test from "@/pages/test";
 
 interface MediaProps {
   loading?: boolean;
@@ -35,8 +37,11 @@ export default function Home(props: MediaProps) {
       mode: mode,
     },
   });
+   // ((((((((((((data))))))))))))
+
   return (
      <>
+     <Provider store={store}>
         <ThemeProvider theme={darkTheme}>
           {isLoggedIn()?   <Box sx={{backgroundColor: "background.default",color: "text.primary"}}>
                 {loading?  <Skeleton variant="rectangular" width={100} height={60} /> : <NavBar />}
@@ -47,9 +52,10 @@ export default function Home(props: MediaProps) {
                   
                 </Stack>
                 <AddPost />
-          </Box>: <Link href="/login">Login Or register </Link>}
+          </Box>: <Test />}
         
         </ThemeProvider>
+      </Provider>
      </>
   )
 }

@@ -1,7 +1,7 @@
 import { Box, Typography, styled, Grid, Link, Divider, Palette, Modal, } from '@mui/material'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
@@ -11,7 +11,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Signup from '../signup';
 // import jwt from 'jsonwebtoken';
 import Router , {useRouter}  from 'next/router';
-import { useGetAllUsersQuery } from '@/services/api';
+import { useGetAllUsersQuery, useLoginMutation } from '@/services/api';
+import { stringify } from 'querystring';
 
 // -----Theme---------
 export const loginTheme = createTheme({
@@ -68,24 +69,37 @@ const CreatePage= styled(Stack)({
      
 });
 
-function LoginComp() {
+
+const LoginComp = () => {
 
     const [openRegister, setOpenRegister] = useState(false)
-    const usernameRef = useRef({value: ''})
-    const passwordRef = useRef({value: ''})
+
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
     const [error, setError] = useState('')
     const router = useRouter()
-    const {data, isSuccess, isLoading, isFetching} = useGetAllUsersQuery()
-    const login = ()=>{
-        const filterUser =  data?.filter(user => user.email == usernameRef?.current.value)
-         return filterUser? router.push('/'): setError("Something went wrong ")
-        
-    }
+    const [login, { isLoading, isSuccess, }] = useLoginMutation();
+    const [loginData, setLoginData] = useState({email: "", password: ""})
 
+    React.useEffect(() => {
+      if(isSuccess){
+        router.push('/')
+      } else {
+        setError('Something went wrong')
+      }
+    }, [isSuccess])
+
+    const handleLogin = (e: any) => {
+      setLoginData( {email: username, password: password})
+      console.log({email: username, password: password});  
+      login({email: username, password: password});
+
+    };
   return (
-    <ThemeProvider theme={loginTheme}>
+    <ThemeProvider theme={loginTheme}  >
           <CssBaseline />
-            <Box  sx={{backgroundColor: "#f0f2f5", height:"100vh",}}>
+            <Box 
+             sx={{backgroundColor: "#f0f2f5", height:"100vh",}}>
                 <Container fixed>
                         <Grid sx={{height:"100vh", display: "flex", 
                               alignItems: "center",}} gap={8}>
@@ -109,7 +123,9 @@ function LoginComp() {
                                                 <UserNameField color="primary" fullWidth
                                                   sx={{marginBottom: "10px"}} 
                                                   id="username"
-                                                  inputRef={usernameRef}
+                                                  // inputRef={usernameRef}
+                                                  value={username}
+                                                  onChange={(e)=> setUsername(e.target.value)}
                                                   label="Email, Phone Number Or Username"
                                                   variant="outlined" required
                                                 />
@@ -117,11 +133,13 @@ function LoginComp() {
                                                 sx={{marginBottom: "10px"}} 
                                                 color="primary" type="password" 
                                                 id="password" label="Password"
-                                                inputRef={passwordRef}
+                                                value={password}
+                                                // inputRef={passwordRef}
+                                                onChange={(e)=> setPassword(e.target.value)}
                                                 variant="outlined" required
                                                 />
                                                 <LoginButton variant="contained"
-                                                onClick={login}
+                                                onClick={handleLogin}
                                                             fullWidth 
                                                 >
                                                 Login
@@ -178,6 +196,6 @@ function LoginComp() {
         </ThemeProvider>
   
   )
-}
+};
 
 export default LoginComp

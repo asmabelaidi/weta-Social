@@ -1,25 +1,29 @@
+import { LoginResponse } from '@/models/loginResponse.model';
 import { User } from '@/models/user.model';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000',
-    // prepareHeaders: (headers, { getState }) => {
-    //   const token = getState().auth.token;
-    //   if (token) {
-    //     headers.set('authorization', `Bearer ${token}`);
-    //   }
-    //   headers.set('content-type', 'application/json');
-    //   return headers;
-    // },
-  
   }),
     
     endpoints: (builder) => ({
       getAllUsers: builder.query<User[], void>({
         query: () => `/users`,
       }),
+      login: builder.mutation({
+            query: ({email, password }) => ({
+              url: '/login',
+              method: 'POST',
+              body: {email, password },
+          
+        }),
+        transformResponse: (response : LoginResponse) => {
+          const { token } = response;
+          localStorage.setItem('token', token);
+          return token;
+        },
+      }),
     }),
   })
-
-  export const {useGetAllUsersQuery} = userApi
+  export const {useGetAllUsersQuery, useLoginMutation} = userApi
