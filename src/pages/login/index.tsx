@@ -21,7 +21,7 @@ export const loginTheme = createTheme({
 });
 
 
-function index() {
+function Index() {
 
   return (
     <div>
@@ -35,4 +35,4 @@ function index() {
   )
 }
 
-export default index;
+export default Index;

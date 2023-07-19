@@ -11,6 +11,7 @@ import {useState} from 'react'
 import {Provider } from "react-redux";
 import { store } from "@/stores/store";
 import Test from "@/pages/test";
+import Index from "@/pages/login";
 
 interface MediaProps {
   loading?: boolean;
@@ -53,9 +54,11 @@ export default function Home(props: MediaProps) {
                 </Stack>
                 <AddPost />
           </Box>: <Test />}
+              {/* </Box>: <Index />}  */}
         
         </ThemeProvider>
       </Provider>
      </>
   )
 }
+export const dynamic = 'force-dynamic'
