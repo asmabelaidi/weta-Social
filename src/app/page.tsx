@@ -18,7 +18,7 @@ type MediaProps = {
   loading?: boolean;
 }
 
-const Page: NextPage<MediaProps> = ({ loading = false }) => {
+const Page: NextPage<MediaProps> = ({ loading }) => {
   // --------States------------
 
   // const { loading = false } = props;
