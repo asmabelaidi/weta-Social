@@ -99,23 +99,37 @@ const LoginComp = () => {
     <ThemeProvider theme={loginTheme}  >
           <CssBaseline />
             <Box 
-             sx={{backgroundColor: "#f0f2f5", height:"100vh",}}>
+             sx={{backgroundColor: "#f0f2f5", height:"100vh", width: "100%"}}>
                 <Container fixed>
-                        <Grid sx={{height:"100vh", display: "flex", 
-                              alignItems: "center",}} gap={8}>
-                            <Grid item xs={6}>
-                                <Typography variant="h3" color="blue">Weta-Social</Typography>
-                                <Typography variant="h5" color="black">With Weta-Social,</Typography>
-                                <Typography variant="h5" color="black">Share and stay connected with your environement</Typography>
+                        <Grid sx={{height:"100vh",
+                              display: {sm: "flex"}, 
+                              alignItems: "center"}}
+                              gap={8}>
+                            <Grid item xs={12} md={6} sx={{
+                                textAlign: {
+                                  xs: 'center',
+                                  md: 'left',
+                                },
+                                marginBottom:{xs: "3rem", md:""},
+                                paddingTop:{xs: "5rem", md:""}
+                            }} >
+                                <Typography sx={{fontSize:{sm: "2rem", md: "3rem"}, 
+                                                }}
+                                            color="blue">
+                                 Weta-Social
+                                </Typography>
+                                <Typography sx={{fontSize:{sm: "1rem", md: "2rem"}}} color="black">With Weta-Social,</Typography>
+                                <Typography sx={{fontSize:{sm: "1rem", md: "2rem"}}} color="black">Share and stay connected with your environement</Typography>
                             </Grid>
-                            <Grid item xs={6}>
-                                <Box>
+                            <Grid item xs={12} md={6}>
                                     <Card elevation={4} sx={{borderRadius: 4,}}>
                                         <CardContent>
                                             <Box
                                               component="form"
                                                 sx={{
-                                                    margin: 1, width: "396px",
+                                                    margin: 1, width: {
+                                                      lg: "396px",
+                                                    },
                                                 }}
                                                 noValidate
                                             >
@@ -170,19 +184,19 @@ const LoginComp = () => {
                                             </Box>
                                         </CardContent>
                                     </Card>
-                                    <CreatePage direction="row">
+                                    <CreatePage direction="row" >
                                       <Link underline='hover'
-                                            sx={{fontWeight:"bold", color:"black", textDecoration:"non"}}
+                                            sx={{fontSize:{ xs: "0.8rem", md:"1rem"},fontWeight:"bold", color:"black", textDecoration:"non"}}
                                       > 
                                             Create a page 
                                       </Link>
-                                      <Typography>for a celebrity, brand, or business.</Typography>
+                                      <Typography sx={{fontSize:{ xs: "0.9rem", md:"1rem"}}} >for a celebrity, brand, or business.</Typography>
                                         
                                     </CreatePage>
-                                </Box>
-                            </Grid>
+                                
+                            </Grid>  
                         </Grid>
-              </Container>
+                </Container>
                 <Modal
                   open={openRegister}
                   onClose={e=> setOpenRegister(false)}
