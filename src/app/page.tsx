@@ -15,10 +15,12 @@ import Index from "@/pages/login";
 import { NextPage } from "next";
 
 type MediaProps = {
-  loading?: boolean;
+  params?: {
+    loading?: boolean;
+  }
 }
 
-const Page: NextPage<MediaProps> = ({ loading }) => {
+const Page: NextPage<MediaProps> = (props: MediaProps) => {
   // --------States------------
 
   // const { loading = false } = props;
