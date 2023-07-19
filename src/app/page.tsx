@@ -13,11 +13,11 @@ import { store } from "@/stores/store";
 import Test from "@/pages/test";
 import Index from "@/pages/login";
 
-interface MediaProps {
+type MediaProps = {
   loading?: boolean;
 }
 
-export default function Home(props) {
+export default function Page(props: MediaProps) {
   // --------States------------
 
   const { loading = false } = props;
