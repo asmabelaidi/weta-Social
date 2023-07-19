@@ -17,7 +17,7 @@ interface MediaProps {
   loading?: boolean;
 }
 
-export default function Home(props: MediaProps) {
+export default function Home(props) {
   // --------States------------
 
   const { loading = false } = props;
