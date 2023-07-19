@@ -12,15 +12,16 @@ import {Provider } from "react-redux";
 import { store } from "@/stores/store";
 import Test from "@/pages/test";
 import Index from "@/pages/login";
+import { NextPage } from "next";
 
 type MediaProps = {
   loading?: boolean;
 }
 
-export default function Page(props: MediaProps) {
+const Page: NextPage<MediaProps> = ({ loading = false }) => {
   // --------States------------
 
-  const { loading = false } = props;
+  // const { loading = false } = props;
   const [mode, setMode] = useState<PaletteMode>('light');
   
   // -------Functions ------
@@ -61,4 +62,6 @@ export default function Page(props: MediaProps) {
      </>
   )
 }
+
+export default Page;
 // export const dynamic = 'force-dynamic'
