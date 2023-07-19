@@ -1,5 +1,5 @@
 'use client';
-import { Box, createTheme, ThemeProvider } from "@mui/material";
+import { Box, createTheme, ThemeProvider, PaletteMode } from "@mui/material";
 import { Stack } from "@mui/system";
 import Feed from './../compopnents/Feed'
 import SideBar from './../compopnents/SideBar'
@@ -21,7 +21,7 @@ export default function Home(props: MediaProps) {
   // --------States------------
 
   const { loading = false } = props;
-  const [mode, setMode] = useState('light');
+  const [mode, setMode] = useState<PaletteMode>('light');
   
   // -------Functions ------
   const isLoggedIn = ()=>{
@@ -61,4 +61,4 @@ export default function Home(props: MediaProps) {
      </>
   )
 }
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
