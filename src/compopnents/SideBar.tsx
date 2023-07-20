@@ -1,6 +1,7 @@
 const { Box } = require("@mui/system")
-import { List, ListItem, ListItemButton, ListItemIcon,  ListItemText,  Toolbar } from '@mui/material';
+import { List, ListItem, ListItemButton, ListItemIcon,  ListItemText,  PaletteMode,  Toolbar } from '@mui/material';
 import React from 'react'
+import { Dispatch, SetStateAction } from 'react';
 import Divider from '@mui/material/Divider';
 import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -13,7 +14,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import Switch from '@mui/material/Switch';
 
 
-function SideBar ({mode, setMode}: { mode: string, setMode: (mode: string) => void }) {
+function SideBar ({ mode, setMode }: { mode: string; setMode: Dispatch<SetStateAction<PaletteMode>> }) {
      return (
         <Box flex={2} sx={{display: {xs: "none", sm: "block"} }}>
            <Box position="fixed">
