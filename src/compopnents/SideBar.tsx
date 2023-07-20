@@ -13,7 +13,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import Switch from '@mui/material/Switch';
 
 
-function SideBar ({mode, setMode}) {
+function SideBar ({mode, setMode}: { mode: string, setMode: (mode: string) => void }) {
      return (
         <Box flex={2} sx={{display: {xs: "none", sm: "block"} }}>
            <Box position="fixed">
