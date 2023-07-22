@@ -1,15 +1,19 @@
 'use client';
 import { Box, createTheme, ThemeProvider, PaletteMode } from "@mui/material";
 import { Stack } from "@mui/system";
-import Feed from './../compopnents/Feed'
-import SideBar from './../compopnents/SideBar'
-import RightBar from './../compopnents/RightBar'
-import NavBar from './../compopnents/Navbar'
-import AddPost from './../compopnents/AddPost'
+import Feed from '../components/Feed'
+import SideBar from '../components/SideBar'
+import RightBar from '../components/RightBar'
+import NavBar from '../components/Navbar'
+import AddPost from '../components/AddPost'
 import {useState} from 'react'
 import {Provider } from "react-redux";
 import { store } from "@/stores/store";
-import Test from "@/pages/test";
+// import Test from "@/pages/test";
+import dynamic from 'next/dynamic';
+
+const Test = dynamic(() => import('../pages/test'), { ssr: false });
+
 
 const Page  = () => {
   // --------States------------
@@ -18,7 +22,8 @@ const Page  = () => {
   
   // -------Functions ------
   const isLoggedIn = ()=>{
-    const logged = localStorage.getItem('token')
+    // const logged = localStorage.getItem('token')
+    const logged =  typeof window !== "undefined" ?  window.localStorage.getItem("token") : null;
     console.log(logged);
     return !!logged;
   }
@@ -35,7 +40,7 @@ const Page  = () => {
 
   return (
      <>
-     <Provider store={store}>
+     {/* <Provider store={store}> */}
         <ThemeProvider theme={darkTheme}>
           {isLoggedIn()?   <Box sx={{backgroundColor: "background.default",color: "text.primary"}}>
                 <NavBar />
@@ -50,7 +55,7 @@ const Page  = () => {
               {/* </Box>: <Index />}  */}
         
         </ThemeProvider>
-      </Provider>
+      {/* </Provider> */}
      </>
   )
 }
