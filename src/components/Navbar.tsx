@@ -19,7 +19,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import RecentChat from './RecentChat';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
+// import { useRouter } from 'next/navigation';
 // ------------ Styled Items -------------
 
 const StyledToolbar = styled(Toolbar)({
