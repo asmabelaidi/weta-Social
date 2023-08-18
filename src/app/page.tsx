@@ -10,13 +10,15 @@ import Skeleton from '@mui/material/Skeleton';
 import {useState} from 'react'
 import {Provider } from "react-redux";
 import { store } from "@/stores/store";
-import Test from "@/pages/test";
+import { useRouter } from "next/navigation";
 
 interface MediaProps {
   loading?: boolean;
 }
 
 export default function Home(props: MediaProps) {
+
+  const router = useRouter()
   // --------States------------
 
   const { loading = false } = props;
@@ -39,11 +41,13 @@ export default function Home(props: MediaProps) {
   });
    // ((((((((((((data))))))))))))
 
+   if (!isLoggedIn()) router.replace('/login')
+
   return (
      <>
      <Provider store={store}>
         <ThemeProvider theme={darkTheme}>
-          {isLoggedIn()?   <Box sx={{backgroundColor: "background.default",color: "text.primary"}}>
+          <Box sx={{backgroundColor: "background.default",color: "text.primary"}}>
                 {loading?  <Skeleton variant="rectangular" width={100} height={60} /> : <NavBar />}
                 <Stack direction="row" spacing={2} justifyContent="space-evenly" >
                   <SideBar mode={mode} setMode={setMode} /> 
@@ -52,7 +56,7 @@ export default function Home(props: MediaProps) {
                   
                 </Stack>
                 <AddPost />
-          </Box>: <Test />}
+          </Box>
         
         </ThemeProvider>
       </Provider>
